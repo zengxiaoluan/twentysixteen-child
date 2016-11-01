@@ -5,9 +5,29 @@
  Author:       Zeng Xiao Luan
  Author URI:   http://zengxiaoluan.com
  Template:     twentysixteen
- Version:      1.0.0
+ Version:      1.0
  License:      GNU General Public License v2 or later
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
  Text Domain:  twenty-sixteen-child
 */
+.genericon-top:before{
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Genericons";
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    speak: none;
+    text-align: center;
+    text-decoration: inherit;
+    text-transform: none;
+    vertical-align: top;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    width: 33px;
+}
