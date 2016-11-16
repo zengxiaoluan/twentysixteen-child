@@ -30,4 +30,14 @@
     line-height: 33px;
     text-align: center;
     width: 33px;
+<<<<<<< HEAD
+    /*lx*/
+    content: '';
+    background: url(./image/triangle.png) no-repeat top;
+    background-size: 16px; 
+
 }
+
+=======
+}
+>>>>>>> 5b7351f4625465942a46e1cf43808d660d9ba9b0
