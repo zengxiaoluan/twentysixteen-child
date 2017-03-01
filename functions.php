@@ -59,7 +59,7 @@ function twentysixteen_entry_meta() {
         echo '</span>';
     }
 
-    echo '<span>' . the_views() . '</span>';
+    echo '<span>' . get_post_meta( get_the_ID(), 'views', true ) . '</span>';
 }
 
 /* comment_mail_notify v1.0 by willin kan. */
