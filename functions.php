@@ -34,6 +34,32 @@ function orange_revision_times( $num, $post ) {
     return 1;
 }
 
+/**
+ * Prints HTML with date information for current post.
+ *
+ * Create your own twentysixteen_entry_date() function to override in a child theme.
+ *
+ * @since Twenty Sixteen 1.0
+ */
+function twentysixteen_entry_date() {
+    $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+
+    if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+        $time_string = '<time title="published at" class="entry-date published" datetime="%1$s">%2$s</time>';
+    }
+
+    $time_string = sprintf( $time_string,
+        esc_attr( get_the_date( 'c' ) ),
+        get_the_date()
+    );
+
+    printf( '<span class="posted-on"><span class="screen-reader-text">%1$s </span><a href="%2$s" rel="bookmark">%3$s</a></span>',
+        _x( 'Posted on', 'Used before publish date.', 'twentysixteen' ),
+        esc_url( get_permalink() ),
+        $time_string
+    );
+}
+
 //  Custome Prints HTML with meta information for the categories, tags.
 function twentysixteen_entry_meta() {
     if ( 'post' === get_post_type() ) {
@@ -49,6 +75,9 @@ function twentysixteen_entry_meta() {
     if ( in_array( get_post_type(), array( 'post', 'attachment' ) ) ) {
         twentysixteen_entry_date();
     }
+
+    printf( '<span title="%1$s"><time datetime="%3$s"></time>%2$s</span>', _x( 'last updated at' , 'twentysixteen' ), get_the_modified_date(), get_the_modified_date( 'c' ) );
+
 
     $format = get_post_format();
     if ( current_theme_supports( 'post-formats', $format ) ) {
@@ -69,7 +98,8 @@ function twentysixteen_entry_meta() {
         echo '</span>';
     }
 
-    echo '<span>'. __( 'Views ', 'orange' ) . get_post_meta( get_the_ID(), 'views', true ) . '</span>';
+    echo '<span>' . __( 'Views ', 'orange' ) . get_post_meta( get_the_ID(), 'views', true ) . '</span>';
+
 }
 
 /* comment_mail_notify v1.0 by willin kan. */

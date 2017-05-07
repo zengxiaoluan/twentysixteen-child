@@ -15,14 +15,15 @@
     
     $('<div id="color-box" style="position:fixed;top:0;right:0;bottom:0;left:0;display:none;background:#ccc;opacity: 0.5;z-index:101;filter:blur(5px);"></div>').appendTo('body');
 
-    $('body').on('click', '#color-box', function(event) {
+    $('body').on('click', '#color-box,.color-box-img', function(event) {
         $('#color-box').fadeOut(500);
         $('.color-box-img').hide(500);
     });
 
     $('article img').each(function(index, el) {
-        if( $(el).parent().is('a') )
+        if( $(el).parent().is('a') ){
             return;
+        }
 
         $(el).click(function(event) {
             $(event.target).clone().appendTo('body').css({
@@ -37,10 +38,11 @@
                 maxHeight: '90%',
                 width: 'auto',
                 height: 'auto',
-                display: 'none'
+                display: 'none',
+                cursor: 'zoom-out'
             }).attr('class', 'color-box-img').show(500);
             $('#color-box').fadeIn(500);
         });
     });
 
-})(jQuery)
+})(jQuery);

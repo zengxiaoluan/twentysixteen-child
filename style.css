@@ -31,4 +31,9 @@
     text-align: center;
     width: 33px;
 }
-
+article img{
+    cursor: zoom-in;
+}
+article a img{
+    cursor: pointer;
+}
