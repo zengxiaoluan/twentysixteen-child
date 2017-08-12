@@ -70,7 +70,7 @@
         },
         copyHandler: function(){
             function addCopyrights( event ){
-                EventUtil.setClipboardText( event, window.getSelection().toString() + '\n内容来自：' + location.href )
+                EventUtil.setClipboardText( event, window.getSelection().toString() + '\n\n内容来自：' + location.href )
                 event.preventDefault();
             }
             document.addEventListener( 'copy', addCopyrights, false );
