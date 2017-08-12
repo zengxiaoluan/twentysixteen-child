@@ -16,7 +16,7 @@ add_action('wp_enqueue_scripts', 'enqueue_styles');
 function enqueue_styles(){
     // load parent styles
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-    wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/child.js', array(), '2016-11-01', true );
+    wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/child.js', array(), '2016-11-02', true );
 }
 
 // add back-to-top and beian number
