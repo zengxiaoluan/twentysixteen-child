@@ -1,5 +1,8 @@
 <?php 
 
+/* include email notice code */
+get_template_directory() . './includes/notice.php';
+
 /* Automatic updates for All themes: */
 add_filter( 'auto_update_theme', '__return_true' );
 
@@ -101,27 +104,3 @@ function twentysixteen_entry_meta() {
     echo '<span>' . __( 'Views ', 'orange' ) . get_post_meta( get_the_ID(), 'views', true ) . '</span>';
 
 }
-
-/* comment_mail_notify v1.0 by willin kan. */
-function comment_mail_notify($comment_id) {
-    $comment = get_comment($comment_id);
-    $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
-    $spam_confirmed = $comment->comment_approved;
-    if (($parent_id != '') && ($spam_confirmed != 'spam')) {
-        $wp_email = 'no-reply@zengxiaoluan.com'; //e-mail 发出点, no-reply 可改为可用的 e-mail.
-        $to = trim(get_comment($parent_id)->comment_author_email);
-        $subject = '您在 [' . get_option("blogname") . '] 的留言有了回复';
-        $message = '<p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
-            <p><strong>您曾在《' . get_the_title($comment->comment_post_ID) . '》的留言:</strong><br />'
-            . trim(get_comment($parent_id)->comment_content) . '</p>
-            <p><strong>' . trim($comment->comment_author) . ' 给您的回复:</strong><br />'
-            . trim($comment->comment_content) . '<br /></p>
-            <p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '" target="_blank">查看回复完整內容</a></p>
-            <p><a href="'. get_option( 'siteurl' ) .'" target="_blank">' . get_option('blogname') . '</a></p>
-            <p>(此邮件由系统自动发送，请勿回复.)</p>';
-        $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
-        $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
-        wp_mail( $to, $subject, $message, $headers );
-    }
-}
-add_action('comment_post', 'comment_mail_notify');
