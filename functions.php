@@ -104,3 +104,28 @@ function twentysixteen_entry_meta() {
     echo '<span>' . __( 'Views ', 'orange' ) . get_post_meta( get_the_ID(), 'views', true ) . '</span>';
 
 }
+
+// add custome SEO --- start
+function SEO(){
+    echo '<meta name="baidu_union_verify" content="9045564ee1cbe7e65c46204aba90391b">';
+
+    if (is_home()) {
+        $description = __( '“乱”是这个世界的本质，我看到了快乐和秩序。_曾小乱', 'zengxiaoluan' );
+        $keywords = get_option('blogdescription').','.get_option('blogname');
+    }else{
+        $description = get_the_title();
+        $keywords = get_the_tag_list();
+        if (empty($keywords)) {
+            $keywords = __( '“乱”是这个世界的本质，我看到了快乐和秩序。_曾小乱', 'zengxiaoluan' );
+        }else{
+            $keywords = preg_replace('/<a href=".*?" rel="tag">/i', ',', $keywords);
+            $keywords = preg_replace('/<\/a>/i', '', $keywords);
+            $keywords = trim($keywords,',');
+        }
+    }
+    
+    echo sprintf("<meta name='description' content='%s'><meta name='keywords' content='%s'>",$description,$keywords);
+
+}
+add_action( 'wp_head', 'SEO' );
+// add custome SEO --- end
