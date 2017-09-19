@@ -1,7 +1,10 @@
 <?php 
 
 /* include email notice code */
-get_template_directory() . './includes/notice.php';
+require get_stylesheet_directory() . '/includes/notice.php';
+
+/* include google gtag */
+require get_stylesheet_directory() . '/includes/gtag.php';
 
 /* Automatic updates for All themes: */
 add_filter( 'auto_update_theme', '__return_true' );
