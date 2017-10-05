@@ -31,6 +31,6 @@
 
 <?php 
 
-    add_action( 'wp_head', 'gtag' );
-
- ?>
+    if (!is_user_logged_in()) {
+        add_action( 'wp_head', 'gtag' );
+    }
