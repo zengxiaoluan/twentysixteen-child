@@ -37,9 +37,3 @@ article img{
 article a img{
     cursor: pointer;
 }
-#nprogress .bar {
-    top: 21px !important;
-}
-#nprogress .peg {
-    display: none;
-}
