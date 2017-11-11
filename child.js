@@ -1,7 +1,9 @@
 /**
  * author me@zengxiaoluan.com
  * created 2016-11-01
- * updated 2017-08-12
+ * 
+ * updated0 2017-08-12
+ * updated1 2017-11-10
  */
 ;'use strict';
 
@@ -71,6 +73,35 @@
                 event.preventDefault();
             }
             document.addEventListener( 'copy', addCopyrights, false );
+        },
+        nprogress: function(){
+            NProgress.configure({
+                    trickle: false,
+                    showSpinner: false,
+                    minimum: 0,
+                    trickleSpeed: 100,
+                    speed: 100
+                });
+            NProgress.start()
+
+            var documentHeight = $(document).height();
+            var windowHeight = $(window).height();
+            var timer;
+
+            scrollHandler();
+            function scrollHandler(){
+                clearTimeout(timer);
+                var timer = setTimeout(function(){
+                    var increment = $(window).scrollTop() / (documentHeight - windowHeight);
+                    // console.log(increment)
+                    increment = increment >= 1 ? 0.9999 : increment;
+                    NProgress.set(increment)
+                }, 400);
+
+            }
+            $(window).scroll(function(event) {
+                scrollHandler();
+            });
         }
     }
 

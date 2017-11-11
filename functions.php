@@ -1,10 +1,10 @@
 <?php 
 
 /* include email notice code */
-require get_stylesheet_directory() . '/includes/notice.php';
+require_once get_stylesheet_directory() . '/includes/notice.php';
 
 /* include google gtag */
-require get_stylesheet_directory() . '/includes/gtag.php';
+require_once get_stylesheet_directory() . '/includes/gtag.php';
 
 /* Automatic updates for All themes: */
 add_filter( 'auto_update_theme', '__return_true' );
@@ -22,7 +22,12 @@ add_action('wp_enqueue_scripts', 'enqueue_styles');
 function enqueue_styles(){
     // load parent styles
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-    wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/child.js', array(), '2016-11-02', true );
+    wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/child.js', array('nprogress-script'), '2017-11-10', true );
+
+    // load nprogress
+    wp_enqueue_script( 'nprogress-script', get_stylesheet_directory_uri() . '/js/nprogress/nprogress.js', array(), '2017-11-10', true );
+    wp_enqueue_style( 'nprogress-style', get_stylesheet_directory_uri() . '/js/nprogress/nprogress.css' );
+
 }
 
 // add back-to-top and beian number
