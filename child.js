@@ -98,10 +98,9 @@
                     trickle: false,
                     showSpinner: false,
                     minimum: 0,
-                    trickleSpeed: 0,
-                    speed: 100
+                    trickleSpeed: 1000,
+                    speed: 1000
                 });
-            NProgress.start()
 
             var documentHeight = $(document).height();
             var windowHeight = $(window).height();
