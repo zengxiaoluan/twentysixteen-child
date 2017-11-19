@@ -11,29 +11,29 @@
  Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
  Text Domain:  twenty-sixteen-child
 */
-.genericon-top:before{
-    -webkit-font-smoothing: antialiased;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Genericons";
-    font-size: 16px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1;
-    speak: none;
-    text-align: center;
-    text-decoration: inherit;
-    text-transform: none;
-    vertical-align: top;
-    height: 33px;
-    line-height: 33px;
-    text-align: center;
-    width: 33px;
+.genericon-top::before {
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Genericons";
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-align: center;
+  text-decoration: inherit;
+  text-transform: none;
+  vertical-align: top;
+  height: 33px;
+  width: 33px;
 }
-article img{
-    cursor: zoom-in;
+
+article img {
+  cursor: zoom-in;
 }
-article a img{
-    cursor: pointer;
+
+article a img {
+  cursor: pointer;
 }

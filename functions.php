@@ -4,7 +4,7 @@
 require_once get_stylesheet_directory() . '/includes/notice.php';
 
 /* include google gtag */
-require_once get_stylesheet_directory() . '/includes/gtag.php';
+// require_once get_stylesheet_directory() . '/includes/gtag.php';
 
 /* Automatic updates for All themes: */
 add_filter( 'auto_update_theme', '__return_true' );
