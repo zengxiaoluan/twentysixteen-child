@@ -34,6 +34,7 @@ function enqueue_styles(){
 add_action( 'twentysixteen_credits', 'add_beian_number');
 
 function add_beian_number(){
+    echo "<span class='site-title'>&copy;".date('Y-m-d', strtotime(get_userdata(1)->user_registered) ).' - '.date('Y-m-d')."</span>"; 
     echo "<span class='site-title'><a target='_blank' href='http://www.miibeian.gov.cn/state/outPortal/loginPortal.action'>湘ICP备16005159号-1</a></span>";
     echo "<span class='site-title'><a id='top' class='genericon-top' title='回到顶部'></a></span>";
 }
