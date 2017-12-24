@@ -27,9 +27,7 @@
 
     </script>
 
-<?php } ?>
-
-<?php 
+<?php } 
 
     if (!is_user_logged_in()) {
         add_action( 'wp_head', 'gtag' );
