@@ -15,13 +15,22 @@
 
         <div id="fullpage">
             <div class="section">
-                <header class="entry-header">
-                    <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-                </header>
+                <div class="slide">
+                    <header class="entry-header text-center">
+                        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+                        <?php echo bloginfo('name') . ' | '; the_date();?>
+                    </header>
+                </div>
+                <?php foreach ($slides as $slide): ?>
+                    <div class="slide"><?php echo $slide; ?></div>
+                <?php endforeach; ?>
             </div>
-            <?php foreach ($slides as $slide): ?>
-                <div class="section"><?php echo $slide; ?></div>
-            <?php endforeach; ?>
         </div>
 
 </article><!-- #post-## -->
+
+<style>
+    .text-center {
+        text-align: center;
+    }
+</style>

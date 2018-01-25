@@ -8,6 +8,15 @@
 get_header('slides'); ?>
 
     <?php
+        // 转为<!--more-->
+        add_filter('the_content', 'inject_content_filter', 999);
+        function inject_content_filter($content) {
+          $content = preg_replace('/<span id\=\"(more\-\d+)"><\/span>/', '<!--more-->', $content);
+          return $content;
+        }
+     ?>
+
+    <?php
     // Start the loop.
     while ( have_posts() ) : the_post();
 
@@ -28,7 +37,11 @@ get_header('slides'); ?>
     <script>
         (function ($) {
             $(document).ready(function () {
-              $('#fullpage').fullpage()
+              $('#fullpage').fullpage({
+                sectionsColor: ['#f2f2f2'],
+                controlArrows: false,
+                anchors: ['slides'],
+              })
             })
         })(jQuery)
     </script>
