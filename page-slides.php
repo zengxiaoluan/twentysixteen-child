@@ -9,11 +9,11 @@ get_header('slides'); ?>
 
     <?php
         // 转为<!--more-->
-        add_filter('the_content', 'inject_content_filter', 999);
-        function inject_content_filter($content) {
-          $content = preg_replace('/<span id\=\"(more\-\d+)"><\/span>/', '<!--more-->', $content);
-          return $content;
-        }
+        // add_filter('the_content', 'inject_content_filter', 999);
+        // function inject_content_filter($content) {
+        //     $content = preg_replace('/<span id\=\"(more\-\d+)"><\/span>/', '<!--more-->', $content);
+        //     return $content;
+        // }
      ?>
 
     <?php

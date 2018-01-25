@@ -11,7 +11,9 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
     <?php twentysixteen_post_thumbnail(); ?>
-    <?php $slides = explode('<!--more-->', apply_filters('the_content', get_the_content())); ?>
+    <?php 
+        $slides = explode('<hr />', apply_filters('the_content', get_the_content()));
+    ?>
 
         <div id="fullpage">
             <div class="section">
