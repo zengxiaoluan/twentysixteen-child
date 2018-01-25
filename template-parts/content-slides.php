@@ -27,6 +27,14 @@
                     <div class="slide"><?php echo $slide; ?></div>
                 <?php endforeach; ?>
             </div>
+            <div class="section">
+                <?php 
+                    // If comments are open or we have at least one comment, load up the comment template.
+                    if ( comments_open() || get_comments_number() ) {
+                        comments_template();
+                    }
+                 ?>
+            </div>
         </div>
 
 </article><!-- #post-## -->

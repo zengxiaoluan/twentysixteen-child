@@ -23,11 +23,6 @@ get_header('slides'); ?>
         // Include the page content template.
         get_template_part( 'template-parts/content', 'slides' );
 
-        // If comments are open or we have at least one comment, load up the comment template.
-        if ( comments_open() || get_comments_number() ) {
-            comments_template();
-        }
-
         // End of the loop.
     endwhile;
     ?>
@@ -40,7 +35,7 @@ get_header('slides'); ?>
               $('#fullpage').fullpage({
                 sectionsColor: ['#f2f2f2'],
                 controlArrows: false,
-                anchors: ['slides'],
+                anchors: ['slides', 'slides-comments'],
               })
             })
         })(jQuery)
