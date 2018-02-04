@@ -19,8 +19,13 @@
             <div class="section">
                 <div class="slide">
                     <header class="entry-header text-center">
+                        <?php echo get_avatar(1, 128); ?>
                         <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-                        <?php echo bloginfo('name') . ' | '; the_date();?>
+                        <a href="<?php bloginfo('url'); ?>" target="_blank">
+                            <?php bloginfo('name'); ?>
+                        </a>
+                        <?php echo ' | '; the_date(); echo ' | ';?>
+                        <?php the_views(); ?>
                     </header>
                 </div>
                 <?php foreach ($slides as $slide): ?>
@@ -34,6 +39,18 @@
                         comments_template();
                     }
                  ?>
+            </div>
+            <div class="section">
+                <?php if ( has_nav_menu( 'primary' ) ) : ?>
+                    <nav class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Primary Menu', 'twentysixteen' ); ?>">
+                        <?php
+                            wp_nav_menu( array(
+                                'theme_location' => 'primary',
+                                'menu_class'     => 'primary-menu',
+                             ) );
+                        ?>
+                    </nav><!-- .main-navigation -->
+                <?php endif; ?>
             </div>
         </div>
 

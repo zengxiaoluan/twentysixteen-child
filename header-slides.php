@@ -24,4 +24,4 @@
 <body <?php body_class(); ?>>
 <div id="page" class="site">
     <div class="site-inner">
-        <div id="content">
+        <div id="content" class="site-content">
