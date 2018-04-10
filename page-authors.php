@@ -56,7 +56,7 @@ get_header(); ?>
 
         ?>
             <li class="one">
-                <a class="avatar" title="<?php echo $display_name; ?>" target="_blank" href="<?php echo $link; ?>">
+                <a class="avatar-wrap" title="<?php echo $display_name; ?>" target="_blank" href="<?php echo $link; ?>">
                     <?php echo get_avatar($authorID, 200, '', $display_name, ['class'=>'author-avatar']); ?>
                 </a>
                 <dl class="text">
@@ -69,7 +69,7 @@ get_header(); ?>
                     <?php echo $description; ?>
                     <dd>
                         <a target="_blank" href="<?php echo $link; ?>">
-                            <?php echo $user_post_count; ?> posts
+                            <?php echo $user_post_count; ?> 篇文章
                         </a>
                     </dd>
                 </dl>
@@ -83,23 +83,27 @@ get_header(); ?>
 </div>
 
 <style>
+    .author-list {
+        margin: 0 1em;
+    }
     .author-list .one {
         border: 1px solid #eee;
         margin-bottom: 1em;
         padding: 1em;
     }
-    .author-list .avatar {
+    .author-list .avatar-wrap {
         display: inline-block;
         vertical-align: middle;
+        margin-right: 1em;
     }
     .author-list .text {
         display: inline-block;
         vertical-align: middle;
     }
-    .avatar {
+    .author-list .avatar {
         transition: border-radius .4s;
     }
-    .author-avatar:hover {
+    .author-list .avatar:hover {
         border-radius: unset !important;
     }
 </style>
