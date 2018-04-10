@@ -16,6 +16,14 @@ get_header(); ?>
             // Include the page content template.
             get_template_part( 'template-parts/content', 'page' );
 
+        ?>
+        <div class="author-list">
+            <ul>
+                <?php contributors(); ?>
+            </ul>
+        </div>
+        <?php
+
             // If comments are open or we have at least one comment, load up the comment template.
             if ( comments_open() || get_comments_number() ) {
                 comments_template();
@@ -28,7 +36,7 @@ get_header(); ?>
             function contributors() {
                 global $wpdb;
              
-                $authors = $wpdb->get_results("SELECT ID, user_nicename from $wpdb->users ORDER BY display_name");
+                $authors = $wpdb->get_results("SELECT ID, user_nicename from $wpdb->users ORDER BY ID");
              
                 foreach($authors as $author) {
 
@@ -42,12 +50,14 @@ get_header(); ?>
 
                     $user_url = get_the_author_meta('user_url', $authorID);
 
+                    $user_post_count = count_user_posts( $authorID );
+
                     $link = get_bloginfo('url') . '/author/' . $user_nicename;
 
         ?>
             <li class="one">
-                <a class="avatar" target="_blank" href="<?php echo $link; ?>">
-                    <?php echo get_avatar($authorID); ?>
+                <a class="avatar" title="<?php echo $display_name; ?>" target="_blank" href="<?php echo $link; ?>">
+                    <?php echo get_avatar($authorID, 200, '', $display_name, ['class'=>'author-avatar']); ?>
                 </a>
                 <dl class="text">
                     <dt><?php echo $display_name; ?></dt>
@@ -57,18 +67,17 @@ get_header(); ?>
                         </a>
                     </dd>
                     <?php echo $description; ?>
+                    <dd>
+                        <a target="_blank" href="<?php echo $link; ?>">
+                            <?php echo $user_post_count; ?> posts
+                        </a>
+                    </dd>
                 </dl>
             </li>
         <?php
-
                 }
             }
         ?>
-        <div class="author-list">
-            <ul>
-                <?php contributors(); ?>
-            </ul>
-        </div>
     </main>
     <?php get_sidebar( 'content-bottom' ); ?>
 </div>
@@ -81,9 +90,17 @@ get_header(); ?>
     }
     .author-list .avatar {
         display: inline-block;
+        vertical-align: middle;
     }
     .author-list .text {
         display: inline-block;
+        vertical-align: middle;
+    }
+    .avatar {
+        transition: border-radius .4s;
+    }
+    .author-avatar:hover {
+        border-radius: unset !important;
     }
 </style>
 
