@@ -112,6 +112,46 @@
         window.NProgress.set(increment)
       }
       $(window).scroll(EventUtil.throttle(scrollHandler, 100))
+    },
+    contentMenu: function () {
+      if (!$('body.single').length) return
+      var h2 = $('.entry-content h2').not('.author-title')
+      var a = h2.find('a')
+      var html = '<ul id="anchors-wrap"><li>文章目录</li>'
+
+      a.each(function(index, el) {
+        html += '<li><a class="anchors" href="#' + el.id + '">' + $(this).parent('h2').text() + '</a></li>'
+      });
+
+      html += '</ul>'
+
+      $('.entry-footer').append(html)
+
+      $('.entry-footer').on('click', '.anchors', function(event) {
+        event.preventDefault()
+        var hash = $(this).attr('href').slice(1)
+        var targetH2 = $('#' + hash).parent('h2')
+        $('html, body').animate({
+          scrollTop: targetH2.offset().top - targetH2.outerHeight(true)
+        });
+        history.replaceState({}, null, '#' + hash)
+      });
+
+      var top = $('#anchors-wrap').offset().top
+
+      $(window).scroll(function(event) {
+        var scrollTop = $(window).scrollTop()
+
+        if (top - scrollTop <= 0) {
+          $('#anchors-wrap').addClass('anchors-fixed')
+        } else {
+          $('#anchors-wrap').removeClass('anchors-fixed')
+        }
+        if ($('#comments').offset().top - $(window).height() < scrollTop) {
+          $('#anchors-wrap').removeClass('anchors-fixed')
+        }
+      });
+
     }
   }
 

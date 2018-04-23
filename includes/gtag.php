@@ -29,6 +29,6 @@
 
 <?php } 
 
-    if (!is_user_logged_in()) {
+    if (!is_user_logged_in() && !WP_DEBUG) {
         add_action( 'wp_head', 'gtag' );
     }

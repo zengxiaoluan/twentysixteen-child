@@ -37,3 +37,12 @@ article img {
 article a img {
   cursor: pointer;
 }
+
+#anchors-wrap {
+  margin-top: 2em;
+}
+.anchors-fixed {
+  position: fixed;
+  left: 50px;
+  bottom: 50px;
+}
