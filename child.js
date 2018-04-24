@@ -114,8 +114,10 @@
       $(window).scroll(EventUtil.throttle(scrollHandler, 100))
     },
     contentMenu: function () {
-      if (!$('body.single').length) return
       var h2 = $('.entry-content h2').not('.author-title')
+      
+      if (!$('body.single').length || !h2.length) return
+
       var a = h2.find('a')
       var html = '<ul id="anchors-wrap"><li>文章目录</li>'
 
@@ -143,10 +145,11 @@
         var scrollTop = $(window).scrollTop()
 
         if (top - scrollTop <= 0) {
-          $('#anchors-wrap').addClass('anchors-fixed')
+          $('#anchors-wrap').addClass('anchors-fixed').css('left', $('.entry-footer').offset().left);
         } else {
           $('#anchors-wrap').removeClass('anchors-fixed')
         }
+        
         if ($('#comments').offset().top - $(window).height() < scrollTop) {
           $('#anchors-wrap').removeClass('anchors-fixed')
         }

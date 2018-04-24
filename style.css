@@ -40,9 +40,10 @@ article a img {
 
 #anchors-wrap {
   margin-top: 2em;
+  transition: all .3s;
+  bottom: -2em;
 }
 .anchors-fixed {
   position: fixed;
-  left: 50px;
-  bottom: 50px;
+  bottom: 2em !important;
 }
