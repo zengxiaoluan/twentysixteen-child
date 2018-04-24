@@ -118,7 +118,7 @@
     contentMenu: function () {
       var h2 = $('.entry-content h2').not('.author-title')
       
-      if (!$('body.single').length || !h2.length) return
+      if (!$('body.single').length || !h2.length || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return
 
       var a = h2.find('a')
       var html = '<ul id="anchors-wrap"><li>文章目录</li>'
