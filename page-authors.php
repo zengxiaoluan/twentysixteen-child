@@ -90,6 +90,11 @@ get_header(); ?>
         border: 1px solid #eee;
         margin-bottom: 1em;
         padding: 1em;
+        display: flex;
+        align-items: center;
+    }
+    .author-list .one img {
+        max-width: unset;
     }
     .author-list .avatar-wrap {
         display: inline-block;
