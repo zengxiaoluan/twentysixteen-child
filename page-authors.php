@@ -96,6 +96,11 @@ get_header(); ?>
     .author-list .one img {
         max-width: unset;
     }
+    @media screen and (max-width: 710px) {
+        .author-list .one {
+            display: inline-block;
+        }
+    }
     .author-list .avatar-wrap {
         display: inline-block;
         vertical-align: middle;
