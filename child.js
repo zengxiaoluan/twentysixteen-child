@@ -58,35 +58,7 @@
       console.log("%c                            ","background: url(https://zengxiaoluan.com/wp-content/uploads/2016/10/cropped-logo-3.jpg) no-repeat left center;font-size: 128px;");
     },
     colorBox: function () {
-      // color box below
-      $('<div id="color-box" style="position:fixed;top:0;right:0;bottom:0;left:0;display:none;background:#333;opacity: 0.5;z-index:101;filter:blur(5px);"></div>').appendTo('body')
-
-      $('body').on('click', '#color-box,.color-box-img', function (event) {
-        $('#color-box').fadeOut(500)
-        $('.color-box-img').remove()
-      })
-
-      $('article img').click(function (event) {
-        if ($(this).parent().is('a')) {
-          return
-        }
-        $(event.target).clone().appendTo('body').css({
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          right: '0',
-          bottom: '0',
-          zIndex: '102',
-          transform: 'translate(-50%,-50%)',
-          maxWidth: '90%',
-          maxHeight: '90%',
-          width: 'auto',
-          height: 'auto',
-          display: 'none',
-          cursor: 'zoom-out'
-        }).attr('class', 'color-box-img').show(500)
-        $('#color-box').fadeIn(500)
-      })
+      
     },
     copyHandler: function () {
       function addCopyrights (event) {

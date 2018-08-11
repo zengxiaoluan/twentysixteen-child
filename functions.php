@@ -3,6 +3,9 @@
 /* include google gtag */
 require_once get_stylesheet_directory() . '/includes/gtag.php';
 
+// See http://core.trac.wordpress.org/ticket/21307
+add_filter( 'pre_option_link_manager_enabled', '__return_true' );
+
 /* Automatic updates for All themes: */
 add_filter( 'auto_update_theme', '__return_true' );
 
