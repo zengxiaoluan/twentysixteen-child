@@ -12,10 +12,10 @@
 
     <?php twentysixteen_post_thumbnail(); ?>
     <?php 
-        $slides = explode('<hr />', apply_filters('the_content', get_the_content()));
+        $slides = preg_split('/<hr.*\/>/', apply_filters('the_content', get_the_content()));
     ?>
 
-        <div id="fullpage">
+        <div id="primary">
             <div class="section">
                 <div class="slide">
                     <header class="entry-header text-center">
@@ -28,29 +28,19 @@
                         <?php the_views(); ?>
                     </header>
                 </div>
+
                 <?php foreach ($slides as $slide): ?>
                     <div class="slide"><?php echo $slide; ?></div>
                 <?php endforeach; ?>
-            </div>
-            <div class="section">
-                <?php 
+
+                <?php
                     // If comments are open or we have at least one comment, load up the comment template.
                     if ( comments_open() || get_comments_number() ) {
-                        comments_template();
+                        echo '<div class="slide">';
+                            comments_template();
+                        echo '</div>';
                     }
-                 ?>
-            </div>
-            <div class="section">
-                <?php if ( has_nav_menu( 'primary' ) ) : ?>
-                    <nav class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Primary Menu', 'twentysixteen' ); ?>">
-                        <?php
-                            wp_nav_menu( array(
-                                'theme_location' => 'primary',
-                                'menu_class'     => 'primary-menu',
-                             ) );
-                        ?>
-                    </nav><!-- .main-navigation -->
-                <?php endif; ?>
+                ?>
             </div>
         </div>
 

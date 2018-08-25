@@ -88,7 +88,7 @@ get_header('slides'); ?>
     <script>
         (function ($) {
             $(document).ready(function () {
-              $('#fullpage').fullpage({
+              $('#primary').fullpage({
                 sectionsColor: ['#f2f2f2', '#1bbc9b', '#ccddff', '#4BBFC3', '#7BAABE', 'whitesmoke'],
                 controlArrows: false,
                 anchors: ['slides', 'slides-comments', 'menu'],
