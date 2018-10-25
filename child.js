@@ -4,6 +4,7 @@
  *
  * updated0 2017-08-12
  * updated1 2017-11-10
+ * updated2 2018-10-25 second day in pingan
  */
 'use strict';
 
@@ -57,13 +58,18 @@
 
       console.log("%c                            ","background: url(https://zengxiaoluan.com/wp-content/uploads/2016/10/cropped-logo-3.jpg) no-repeat left center;font-size: 128px;");
     },
-    colorBox: function () {
-      
-    },
     copyHandler: function () {
       function addCopyrights (event) {
-        EventUtil.setClipboardText(event, window.getSelection().toString() + '\n\n内容来自曾小乱的blog：' + window.location.href)
-        event.preventDefault()
+        var copyStr = window.getSelection().toString();
+        var limitSize = 20;
+        var enter = '\n\n';
+        if (copyStr.length > limitSize) {
+          EventUtil.setClipboardText(event, copyStr + enter + 
+            '标题：' + $('h1').text() + enter +
+            '内容来自曾小乱的blog：' + window.location.href);
+          
+          event.preventDefault();
+        }
       }
       document.addEventListener('copy', addCopyrights, false)
     },
@@ -93,7 +99,7 @@
       if (!$('body.single').length || !h2.length || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return
 
       var a = h2.find('a')
-      var html = '<ul id="anchors-wrap"><li>文章目录</li>'
+      var html = '<ul id="anchors-wrap"><li id="total-menu">文章目录</li>'
 
       a.each(function(index, el) {
         html += '<li><a class="anchors" href="#' + el.id + '">' + $(this).parent('h2').text() + '</a></li>'
@@ -111,6 +117,13 @@
           scrollTop: targetH2.offset().top - targetH2.outerHeight(true)
         });
         history.replaceState({}, null, '#' + hash)
+      })
+      .end()
+      .on('click', '#total-menu', function (event) {
+        $('html, body').animate({
+          scrollTop: $('h1').offset().top - $('h1').outerHeight(true)
+        });
+        history.replaceState({}, null, '#' + '');
       });
 
       var top = $('#anchors-wrap').offset().top
