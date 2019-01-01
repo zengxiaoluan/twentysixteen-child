@@ -3,6 +3,9 @@
 /* include google gtag */
 require_once get_stylesheet_directory() . '/includes/gtag.php';
 
+// add social share buttons
+require_once get_stylesheet_directory() . '/includes/share.php';
+
 // See http://core.trac.wordpress.org/ticket/21307
 add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
@@ -113,6 +116,9 @@ function twentysixteen_entry_meta() {
 // add custome SEO --- start
 function SEO(){
     echo '<meta name="baidu_union_verify" content="9045564ee1cbe7e65c46204aba90391b">';
+
+    // add qzone share source
+    echo '<meta name="site" content="' . get_bloginfo('url') . '" />';
 
     if (is_home()) {
         $description = __( '“乱”是这个世界的本质，我看到了快乐和秩序。_曾小乱', 'zengxiaoluan' );
