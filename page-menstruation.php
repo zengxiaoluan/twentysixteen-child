@@ -48,6 +48,7 @@ get_header(); ?>
 
             var child = document.createElement('div')
             child.id = 'highcharts-' + key
+            child.style.marginBottom = '20px'
             highcharts.appendChild(child)
 
             genarateGraph(key, allData[key])
@@ -103,6 +104,25 @@ get_header(); ?>
         return gapArr
     }
 
+    function getAverage(arr) {
+        var length = arr.filter(function (item) {
+            return item
+        }).length;
+
+        var sum = arr.reduce(function (prev, next) {
+            prev = prev || 0
+            if (next) {
+                return prev += next
+            }
+            return prev
+        });
+        var ave = Math.round(sum / length)
+        var newArr = arr.map(function () {
+            return ave
+        });
+        return newArr
+    }
+
     function genarateGraph(year, series) {
         Highcharts.chart('highcharts-' + year, {
             title: {
@@ -134,6 +154,14 @@ get_header(); ?>
                     type: 'line',
                     name: 'Gap Day',
                     data: getGapDay(series, year)
+                },
+                {
+                    type: 'line',
+                    name: 'Average Day',
+                    data: getAverage(getGapDay(series, year)),
+                    marker: {
+                        enabled: false
+                    }
                 }
             ],
         });
