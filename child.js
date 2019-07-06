@@ -101,7 +101,7 @@
       // 给 h2 自动加上一个 a 标签
       $.each(h2, function () {
         if (!$(this).find('a').length) {
-          var title = $(this).text()
+          var title = $(this).text().replace(/\s+/g, '')
           $(this).append(`<a id="${title}"></a>`);
         }
       });
