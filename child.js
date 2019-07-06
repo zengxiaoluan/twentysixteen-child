@@ -98,6 +98,14 @@
       
       if (!$('body.single').length || !h2.length || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) return
 
+      // 给 h2 自动加上一个 a 标签
+      $.each(h2, function () {
+        if (!$(this).find('a').length) {
+          var title = $(this).text()
+          $(this).append(`<a id="${title}"></a>`);
+        }
+      });
+
       var a = h2.find('a')
       var html = '<ul id="anchors-wrap"><li id="total-menu">文章目录</li>'
 
