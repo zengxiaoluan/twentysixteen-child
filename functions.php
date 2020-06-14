@@ -3,6 +3,9 @@
 /* include google gtag */
 require_once get_stylesheet_directory() . '/includes/gtag.php';
 
+/* include google adsense */
+require_once get_stylesheet_directory() . '/includes/google-adsense.php';
+
 // add social share buttons
 require_once get_stylesheet_directory() . '/includes/share.php';
 
