@@ -23,7 +23,7 @@ function svg2png(files: FileList) {
   fReader.onload = (oFREvent) => {
     let image = new Image()
     if (oFREvent.target) {
-      image.src = oFREvent.target.result as string
+      image.src = (oFREvent.target as any).result as string
 
       image.onload = () => {
         let canvas = document.createElement('canvas') as HTMLCanvasElement
