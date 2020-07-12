@@ -27,6 +27,8 @@ function loadHandler2() {
         },
         created: function () {
             var hash = location.hash.substr(1).match(/events=(.+)/) || [];
+            if (!hash.length)
+                return;
             var data = JSON.parse(decodeURIComponent(hash[1]));
             if (data && data.length) {
                 var newData = [];

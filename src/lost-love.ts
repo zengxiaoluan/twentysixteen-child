@@ -40,6 +40,7 @@ function loadHandler2() {
 
     created() {
       let hash = location.hash.substr(1).match(/events=(.+)/) || []
+      if (!hash.length) return
       let data = JSON.parse(decodeURIComponent(hash[1])) as LoveEvent[]
 
       if (data && data.length) {
