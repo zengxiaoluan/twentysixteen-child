@@ -16,7 +16,7 @@ function loadHandler2() {
     computed: {
       countDown() {
         let nowMoment = moment()
-        let beforeMoment: number = moment(this.happenedAt)
+        let beforeMoment: number = moment((this as any).happenedAt)
 
         let du = moment.duration(nowMoment - beforeMoment, 'ms')
         let year = du.get('year')
@@ -56,17 +56,15 @@ function loadHandler2() {
 
     methods: {
       add() {
-        console.log(this.event, this.date)
-
-        this.allEvents.push({
-          event: this.event,
-          happenedAt: this.date,
+        (this as any).allEvents.push({
+          event: (this as any).event,
+          happenedAt: (this as any).date,
         })
 
         this.updateURLHash()
       },
       updateURLHash() {
-        let json = JSON.stringify(this.allEvents)
+        let json = JSON.stringify((this as any).allEvents)
         history.replaceState('', '', `#events=${json}`)
       },
     },

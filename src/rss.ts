@@ -1,1 +1,2 @@
-console.log('hello')
+let a: number = 1
+console.log(1)
