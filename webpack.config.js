@@ -2,7 +2,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path');
 
 module.exports = {
-  entry: './src/rss.ts',
+  entry: './src/rss/index.ts',
   output: {
     filename: 'rss.js',
     path: path.resolve(__dirname, 'dist'),
@@ -11,7 +11,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    open: true,
+    open: false,
     hot: true,
     port: 8081
   },
@@ -32,7 +32,19 @@ module.exports = {
           }
         }
       },
-      { test: /\.tsx?$/, loader: "ts-loader" },
+      {
+        test: /\.tsx?$/, exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+              appendTsxSuffixTo: [/\.vue$/]
+            }
+          }
+        ]
+      },
       // 它会应用到普通的 `.css` 文件
       // 以及 `.vue` 文件中的 `<style>` 块
       {
@@ -40,6 +52,9 @@ module.exports = {
         use: ['vue-style-loader', 'css-loader'],
       },
     ],
+  },
+  resolve: {
+    // extensions: ['*', '.js', '.vue']
   },
   plugins: [
     // 请确保引入这个插件来施展魔法
