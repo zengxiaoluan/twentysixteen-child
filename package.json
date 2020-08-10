@@ -4,7 +4,8 @@
   "description": "",
   "main": "child.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "./node_modules/.bin/webpack -w",
+    "build": "./node_modules/.bin/webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "typescript": "^3.9.5",
     "vue": "^2.6.11"
   }

@@ -1,48 +1,77 @@
 <template>
-  <ul>
-    <li v-for="item,index of subscribes" v-bind:key="item">{{item}}</li>
-  </ul>
+  <div>
+    <ul>
+      <li v-for="(item, index) of subscribes" v-bind:key="index">{{ item }}</li>
+    </ul>
+    <right-bar :items="itemsData"></right-bar>
+  </div>
 </template>
 
 <style scoped></style>
 
 <script lang="ts">
+declare var ajaxurl: string
 import Vue from 'vue'
+import axios from 'axios'
+
+import RightBar from './RightBar.vue'
+
 export default Vue.extend({
   name: 'left-bar',
+  components: { RightBar },
+
   data() {
     return {
-      subscribes: [1, 2, 3, 4, 5],
+      subscribes: [],
+      itemsData: [],
     }
   },
-  created() {
-    const RSS_URL = `https://codepen.io/picks/feed/`
 
-    fetch(RSS_URL)
-      .then((response) => response.text())
-      .then((str) => new window.DOMParser().parseFromString(str, 'text/xml'))
-      .then((data) => {
-        console.log(data)
-        const items = data.querySelectorAll('item')
-        let html = ``
-        items.forEach((el) => {
-          html += `
-        <article>
-          <img src="${
-            el?.querySelector('link')?.innerHTML
-          }/image/large.png" alt="">
-          <h2>
-            <a href="${
-              el?.querySelector('link')?.innerHTML
-            }" target="_blank" rel="noopener">
-              ${el?.querySelector('title')?.innerHTML}
-            </a>
-          </h2>
-        </article>
-      `
+  methods: {
+    fetchData(feedUrl: string) {
+      let action = 'get_rss_data'
+      axios
+        .get(ajaxurl, {
+          params: {
+            action,
+            feedUrl,
+          },
         })
-        document.body.insertAdjacentHTML('beforeend', html)
-      })
+        .then((res) => {
+          console.log(res)
+          let { data } = res
+          if (data.success) {
+            let xml = data.data
+            let dom = new window.DOMParser().parseFromString(xml, 'text/xml')
+            let title = dom.querySelector('channel > title')
+            ;(this.subscribes as any).push(title?.innerHTML)
+
+            const items = dom.querySelectorAll('item')
+
+            items.forEach((el) => {
+              // console.log(el)
+              let title = el?.querySelector('title')?.innerHTML
+              let link = el?.querySelector('link')?.innerHTML
+              let description = el?.querySelector('description')?.innerHTML
+
+              ;(this.itemsData as any).push({ title, link, description })
+            })
+
+            console.log(this.itemsData)
+          }
+        })
+    },
+  },
+  created() {
+    const urls = [
+      'https://www.zhangxinxu.com/wordpress/feed',
+      'https://coolshell.cn/feed',
+      'https://codepen.io/picks/feed/',
+    ]
+
+    for (const url of urls) {
+      this.fetchData(url)
+    }
   },
 })
 </script>

@@ -2,6 +2,7 @@
   <div>
     <h1>{{ title }}</h1>
     <left-bar></left-bar>
+    <!-- <right-bar></right-bar> -->
   </div>
 </template>
 
@@ -14,6 +15,7 @@ h1 {
 <script lang="ts">
 import Vue from 'vue'
 import LeftBar from './components/LeftBar.vue'
+// import RightBar from './components/RightBar.vue'
 
 export default Vue.extend({
   name: 'Root',
