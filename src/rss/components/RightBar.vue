@@ -18,12 +18,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'right-bar',
   props: ['items'],
-  created() {
-    console.log(this.items)
-    console.log('ccccccccc')
-  },
-  updated() {
-    console.log('dddddddddddd', this.items)
-  },
+  created() {},
+  updated() {},
 })
 </script>

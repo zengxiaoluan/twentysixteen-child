@@ -1,7 +1,11 @@
 import Vue from 'vue'
+import store from './store/store'
 import Root from './Root.vue'
 
-new Vue({
+let vm = new Vue({
+  store,
   render: (h) => h(Root),
   created() {},
-}).$mount('#app')
+})
+
+vm.$mount('#app')

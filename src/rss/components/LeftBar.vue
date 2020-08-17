@@ -3,7 +3,6 @@
     <ul>
       <li v-for="(item, index) of subscribes" v-bind:key="index">{{ item }}</li>
     </ul>
-    <right-bar :items="itemsData"></right-bar>
   </div>
 </template>
 
@@ -13,8 +12,16 @@
 declare var ajaxurl: string
 import Vue from 'vue'
 import axios from 'axios'
+import Parser from 'rss-parser'
 
 import RightBar from './RightBar.vue'
+
+let rssParser = new Parser({
+  xml2js: {
+    emptyTag: '',
+    includeWhiteChars: true,
+  },
+})
 
 export default Vue.extend({
   name: 'left-bar',
@@ -23,7 +30,6 @@ export default Vue.extend({
   data() {
     return {
       subscribes: [],
-      itemsData: [],
     }
   },
 
@@ -37,16 +43,19 @@ export default Vue.extend({
             feedUrl,
           },
         })
-        .then((res) => {
-          console.log(res)
+        .then(async (res) => {
           let { data } = res
-          if (data.success) {
+          if (data.success && data.data) {
             let xml = data.data
+            xml = xml.replace('\ufeff', '')
+            let feeds = await rssParser.parseString(xml)
+            console.log(feeds)
             let dom = new window.DOMParser().parseFromString(xml, 'text/xml')
             let title = dom.querySelector('channel > title')
             ;(this.subscribes as any).push(title?.innerHTML)
 
             const items = dom.querySelectorAll('item')
+            let itemsData: any[] = []
 
             items.forEach((el) => {
               // console.log(el)
@@ -54,10 +63,10 @@ export default Vue.extend({
               let link = el?.querySelector('link')?.innerHTML
               let description = el?.querySelector('description')?.innerHTML
 
-              ;(this.itemsData as any).push({ title, link, description })
+              itemsData.push({ title, link, description })
             })
 
-            console.log(this.itemsData)
+            this.$store.commit('concatItems', { amount: itemsData })
           }
         })
     },

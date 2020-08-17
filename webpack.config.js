@@ -1,5 +1,5 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   entry: './src/rss/index.ts',
@@ -13,7 +13,7 @@ module.exports = {
     compress: true,
     open: false,
     hot: true,
-    port: 8081
+    port: 8081,
   },
   module: {
     rules: [
@@ -28,22 +28,23 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
-        test: /\.tsx?$/, exclude: /node_modules/,
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
         use: [
           'babel-loader',
           {
             loader: 'ts-loader',
             options: {
               appendTsSuffixTo: [/\.vue$/],
-              appendTsxSuffixTo: [/\.vue$/]
-            }
-          }
-        ]
+              appendTsxSuffixTo: [/\.vue$/],
+            },
+          },
+        ],
       },
       // 它会应用到普通的 `.css` 文件
       // 以及 `.vue` 文件中的 `<style>` 块
@@ -54,7 +55,7 @@ module.exports = {
     ],
   },
   resolve: {
-    // extensions: ['*', '.js', '.vue']
+    extensions: ['.ts', '.js', '.vue'],
   },
   plugins: [
     // 请确保引入这个插件来施展魔法
