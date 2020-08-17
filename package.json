@@ -18,14 +18,18 @@
     "@babel/preset-env": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.0.0",
+    "deepmerge": "^4.2.2",
     "eslint": "^4.11.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "fibers": "^5.0.0",
     "postcss": "^6.0.14",
     "prettier": "^2.0.5",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
     "stylelint": "^8.2.0",
     "stylelint-config-standard": "^17.0.0",
     "ts-loader": "^8.0.1",
@@ -40,6 +44,7 @@
     "rss-parser": "^3.9.0",
     "typescript": "^3.9.5",
     "vue": "^2.6.11",
+    "vuetify": "^2.3.8",
     "vuex": "^3.5.1"
   }
 }

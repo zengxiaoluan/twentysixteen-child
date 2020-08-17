@@ -5,7 +5,7 @@
  * created at 2020-08-09
  */
 
-get_header();?>
+get_header('rss');?>
 
 
 
@@ -28,7 +28,6 @@ get_header();?>
         endwhile;
         ?>
 
-    <div id="app"></div>
     <script src="<?php echo get_stylesheet_directory_uri() . '/dist/rss.js?'.date('s');?>"></script>
 
 
@@ -40,8 +39,6 @@ get_header();?>
 
 </div><!-- .content-area -->
 
-<style>
-  
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css">
 
 <?php get_footer(); ?>

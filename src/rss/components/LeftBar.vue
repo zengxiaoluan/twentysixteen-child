@@ -1,9 +1,28 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="(item, index) of subscribes" v-bind:key="index">{{ item }}</li>
-    </ul>
-  </div>
+  <v-app>
+    <v-card class="mx-auto" max-width="400" tile>
+      <v-list
+        :rounded="true"
+        :disabled="false"
+        :dense="false"
+        :two-line="false"
+        :three-line="false"
+        :shaped="false"
+        :flat="false"
+        :subheader="false"
+        :sub-group="false"
+        :nav="false"
+        :avatar="false"
+      >
+        <v-list-item v-for="(item, i) in subscribes" :key="i" :inactive="true">
+          <v-list-item-content>
+            <v-list-item-title v-html="item"></v-list-item-title>
+            <v-list-item-subtitle v-html="item"></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </v-app>
 </template>
 
 <style scoped></style>
@@ -16,12 +35,7 @@ import Parser from 'rss-parser'
 
 import RightBar from './RightBar.vue'
 
-let rssParser = new Parser({
-  xml2js: {
-    emptyTag: '',
-    includeWhiteChars: true,
-  },
-})
+let rssParser = new Parser()
 
 export default Vue.extend({
   name: 'left-bar',
