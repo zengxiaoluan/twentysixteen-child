@@ -1,5 +1,6 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: './src/rss/index.ts',
@@ -74,7 +75,8 @@ module.exports = {
       // 以及 `.vue` 文件中的 `<style>` 块
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader'],
+        // use: ['vue-style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
@@ -84,5 +86,8 @@ module.exports = {
   plugins: [
     // 请确保引入这个插件来施展魔法
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'rss.css',
+    }),
   ],
 }

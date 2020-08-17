@@ -28,6 +28,7 @@ get_header('rss');?>
         endwhile;
         ?>
 
+    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() . '/dist/rss.css?'.date('s');?>">
     <script src="<?php echo get_stylesheet_directory_uri() . '/dist/rss.js?'.date('s');?>"></script>
 
 
@@ -39,6 +40,6 @@ get_header('rss');?>
 
 </div><!-- .content-area -->
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"> -->
 
 <?php get_footer(); ?>

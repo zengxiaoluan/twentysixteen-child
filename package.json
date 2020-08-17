@@ -26,6 +26,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "fibers": "^5.0.0",
+    "mini-css-extract-plugin": "^0.10.0",
     "postcss": "^6.0.14",
     "prettier": "^2.0.5",
     "sass": "^1.26.10",

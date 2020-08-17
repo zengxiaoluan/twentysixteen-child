@@ -13,9 +13,6 @@
 </template>
 
 <style>
-h1 {
-  color: red !important;
-}
 .v-text-field__slot input {
   background: none;
   border: none;
