@@ -42,4 +42,5 @@ get_header('rss');?>
 
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"> -->
 
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
