@@ -1,14 +1,16 @@
 <template>
   <v-container class="grey lighten-5">
-    <v-text-field label="Another input"></v-text-field>
-    <v-row>
-      <v-col cols="4" sm="12" md="4">
-        <left-bar></left-bar>
-      </v-col>
-      <v-col cols="8" sm="12" md="8">
-        <right-bar :items="items"></right-bar>
-      </v-col>
-    </v-row>
+    <v-card class="mx-auto" tile>
+      <top-bar></top-bar>
+      <v-row>
+        <v-col sm="12" md="4">
+          <left-bar></left-bar>
+        </v-col>
+        <v-col sm="12" md="8">
+          <right-bar :items="items"></right-bar>
+        </v-col>
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 
@@ -23,12 +25,13 @@
 import Vue from 'vue'
 import LeftBar from './components/LeftBar.vue'
 import RightBar from './components/RightBar.vue'
+import TopBar from './components/TopBar.vue'
 
 import { mapState } from 'vuex'
 
 export default Vue.extend({
   name: 'Root',
-  components: { LeftBar, RightBar },
+  components: { LeftBar, RightBar, TopBar },
   data() {
     return {}
   },

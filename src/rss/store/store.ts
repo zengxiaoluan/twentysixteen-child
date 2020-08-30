@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { CLEAR_ITEMS } from './mutations'
 
 Vue.use(Vuex)
 
@@ -13,8 +14,10 @@ const store = new Vuex.Store({
       state.count++
     },
     concatItems(state, payload) {
-      console.log(state, payload)
       state.items = [...state.items, ...payload.amount]
+    },
+    [CLEAR_ITEMS](state) {
+      state.items.length = 0
     },
   },
 })
