@@ -1,4 +1,5 @@
 import { isFeedAddress } from '../util'
+import { FeedAddress } from '../interface'
 
 const KEYLIST = 'rss-url'
 
@@ -12,6 +13,10 @@ export default class RSSStorage {
     arr.push(feed)
 
     localStorage.setItem(KEYLIST, JSON.stringify(arr))
+  }
+  static updateAllSubscribe(data: FeedAddress[]) {
+    let str = JSON.stringify(data)
+    localStorage.setItem(KEYLIST, str)
   }
   static getFeedList() {
     let str = localStorage.getItem(KEYLIST) || ''

@@ -7,8 +7,6 @@
 
 get_header('rss');?>
 
-
-
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
 
@@ -28,7 +26,7 @@ get_header('rss');?>
         endwhile;
         ?>
 
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() . '/dist/rss.css?'.date('s');?>">
+    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() . '/dist/rss-vuetify.css?'.date('s');?>">
     <script src="<?php echo get_stylesheet_directory_uri() . '/dist/rss.js?'.date('s');?>"></script>
 
 
@@ -40,7 +38,17 @@ get_header('rss');?>
 
 </div><!-- .content-area -->
 
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"> -->
+<style>
+    .comment-form textarea {
+        background: #f7f7f7;
+        background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+        border: 1px solid #d1d1d1;
+        border-radius: 2px;
+        color: #686868;
+        padding: 0.625em 0.4375em;
+        width: 100%;
+    }
+</style>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -87,7 +87,7 @@ module.exports = {
     // 请确保引入这个插件来施展魔法
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'rss.css',
+      filename: 'rss-vuetify.css',
     }),
   ],
 }

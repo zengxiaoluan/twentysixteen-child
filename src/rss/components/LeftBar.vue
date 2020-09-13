@@ -21,12 +21,8 @@
           :inactive="false"
         >
           <v-list-item-content>
-            <v-list-item-title
-              v-html="item.title || item.url"
-            ></v-list-item-title>
-            <v-list-item-subtitle
-              v-html="item.description"
-            ></v-list-item-subtitle>
+            <v-list-item-title v-html="item.title || item.url"></v-list-item-title>
+            <v-list-item-subtitle v-html="item.description"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -38,17 +34,23 @@
 
 <script lang="ts">
 declare var ajaxurl: string
+
 import Vue from 'vue'
+import { mapMutations } from 'vuex'
+
 import axios from 'axios'
-import Parser from 'rss-parser'
+import Parser, { Item } from 'rss-parser'
 import RSSStorage from '../database/localstorage'
 
 import RightBar from './RightBar.vue'
 import { isFeedAddress } from '../util'
-import { CLEAR_ITEMS } from '../store/mutations'
+import { CLEAR_ITEMS, LOADING } from '../store/mutation-types'
 import { FeedAddress } from '../interface'
 
 let rssParser = new Parser()
+
+let methods = mapMutations([CLEAR_ITEMS, LOADING])
+console.log(methods, 'methods')
 
 export default Vue.extend({
   name: 'left-bar',
@@ -62,6 +64,7 @@ export default Vue.extend({
   },
 
   methods: {
+    ...methods,
     fetchData(feedUrl: string) {
       let action = 'get_rss_data'
       axios
@@ -80,25 +83,16 @@ export default Vue.extend({
             this.updateSubscribes(feeds)
 
             console.log(feeds)
-            let dom = new window.DOMParser().parseFromString(xml, 'text/xml')
-            let title = dom.querySelector('channel > title')
 
-            const items = dom.querySelectorAll('item')
-            let itemsData: any[] = []
-
-            items.forEach((el) => {
-              // console.log(el)
-              let title = el?.querySelector('title')?.innerHTML
-              let link = el?.querySelector('link')?.innerHTML
-              let description = el?.querySelector('description')?.innerHTML
-
-              itemsData.push({ title, link, description })
-            })
+            let itemsData: Item[] | undefined = feeds.items
 
             this.$store.commit(CLEAR_ITEMS)
             this.$store.commit('concatItems', { amount: itemsData })
+            this[LOADING](false)
           }
         })
+
+      this[LOADING](true)
     },
     click(url: string, index: number) {
       this.fetchData(url)
@@ -114,24 +108,15 @@ export default Vue.extend({
       }
 
       console.log(this.subscribes)
+      RSSStorage.updateAllSubscribe(this.subscribes)
     },
   },
   created() {
-    const urls = [
-      'https://www.zhangxinxu.com/wordpress/feed',
-      'https://coolshell.cn/feed',
-      'https://codepen.io/picks/feed/',
-    ]
+    let list = RSSStorage.getFeedList() as FeedAddress[]
 
-    let list = RSSStorage.getFeedList()
-    for (const url of list) {
-      if (isFeedAddress(url)) {
-        let item: FeedAddress = {
-          url,
-          title: '',
-          description: '',
-        }
-        this.subscribes.push(item)
+    for (const item of list) {
+      if (isFeedAddress(item.url)) {
+        this.subscribes.push({ ...item })
       }
     }
 
