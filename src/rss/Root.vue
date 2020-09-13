@@ -1,6 +1,6 @@
 <template>
-  <v-container class="grey lighten-5">
-    <v-card class="mx-auto" tile>
+  <v-card class="mx-auto" tile>
+    <v-container class="grey lighten-5">
       <top-bar></top-bar>
       <v-row>
         <v-col sm="12" md="4">
@@ -10,8 +10,8 @@
           <right-bar :items="items"></right-bar>
         </v-col>
       </v-row>
-    </v-card>
-  </v-container>
+    </v-container>
+  </v-card>
 </template>
 
 <style>
