@@ -4,13 +4,13 @@ import { FeedAddress } from '../interface'
 const KEYLIST = 'rss-url'
 
 export default class RSSStorage {
-  static setFeedList(feed: string) {
-    if (!isFeedAddress(feed)) return
+  static setFeedList(url: string) {
+    if (!isFeedAddress(url)) return
 
     let list = localStorage.getItem(KEYLIST) || '[]'
-    let arr: string[] = JSON.parse(list)
+    let arr: FeedAddress[] = JSON.parse(list)
 
-    arr.push(feed)
+    arr.push({ url, title: '', description: '' })
 
     localStorage.setItem(KEYLIST, JSON.stringify(arr))
   }
@@ -19,8 +19,8 @@ export default class RSSStorage {
     localStorage.setItem(KEYLIST, str)
   }
   static getFeedList() {
-    let str = localStorage.getItem(KEYLIST) || ''
-    let json = JSON.parse(str) || []
+    let str = localStorage.getItem(KEYLIST)
+    let json = str ? JSON.parse(str) : []
     return json
   }
 }
