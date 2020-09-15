@@ -36,7 +36,7 @@
 declare var ajaxurl: string
 
 import Vue from 'vue'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 import axios from 'axios'
 import Parser, { Item } from 'rss-parser'
@@ -44,13 +44,21 @@ import RSSStorage from '../database/localstorage'
 
 import RightBar from './RightBar.vue'
 import { isFeedAddress } from '../util'
-import { CLEAR_ITEMS, LOADING } from '../store/mutation-types'
+import {
+  CLEAR_ITEMS,
+  LOADING,
+  UPDATE_SUBSCRIBERS,
+} from '../store/mutation-types'
 import { FeedAddress } from '../interface'
 
 let rssParser = new Parser()
 
-let methods = mapMutations([CLEAR_ITEMS, LOADING])
-console.log(methods, 'methods')
+let methods = mapMutations([CLEAR_ITEMS, LOADING, UPDATE_SUBSCRIBERS])
+let computed = mapState({
+  subscribes: (state: any) => state.subscribes,
+})
+
+console.log(computed, 'mapState')
 
 export default Vue.extend({
   name: 'left-bar',
@@ -58,9 +66,12 @@ export default Vue.extend({
 
   data() {
     return {
-      subscribes: [] as FeedAddress[],
       item: '0',
     }
+  },
+
+  computed: {
+    ...computed,
   },
 
   methods: {
@@ -112,13 +123,7 @@ export default Vue.extend({
     },
   },
   created() {
-    let list = RSSStorage.getFeedList() as FeedAddress[]
-
-    for (const item of list) {
-      if (isFeedAddress(item.url)) {
-        this.subscribes.push({ ...item })
-      }
-    }
+    this[UPDATE_SUBSCRIBERS]()
 
     console.log(this.subscribes)
   },

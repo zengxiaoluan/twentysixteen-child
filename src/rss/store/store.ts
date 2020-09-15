@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { CLEAR_ITEMS, LOADING } from './mutation-types'
+import { CLEAR_ITEMS, LOADING, UPDATE_SUBSCRIBERS } from './mutation-types'
+import RSSStorage from '../database/localstorage'
+import { FeedAddress } from '../interface'
+import { isFeedAddress } from '../util'
 
 Vue.use(Vuex)
 
@@ -9,11 +12,9 @@ const store = new Vuex.Store({
     count: 0,
     items: [''],
     loading: false,
+    subscribes: [] as FeedAddress[],
   },
   mutations: {
-    increment(state) {
-      state.count++
-    },
     concatItems(state, payload) {
       state.items = [...state.items, ...payload.amount]
     },
@@ -23,9 +24,17 @@ const store = new Vuex.Store({
     [LOADING](state, v: boolean) {
       state.loading = v
     },
+    [UPDATE_SUBSCRIBERS](state) {
+      state.subscribes = []
+      let list = RSSStorage.getFeedList() as FeedAddress[]
+
+      for (const item of list) {
+        if (isFeedAddress(item.url)) {
+          state.subscribes.push({ ...item })
+        }
+      }
+    },
   },
 })
-
-store.commit('increment')
 
 export default store
