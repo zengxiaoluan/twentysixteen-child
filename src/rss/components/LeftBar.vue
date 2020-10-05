@@ -21,8 +21,14 @@
           :inactive="false"
         >
           <v-list-item-content>
-            <v-list-item-title v-html="item.title || item.url"></v-list-item-title>
-            <v-list-item-subtitle v-html="item.description"></v-list-item-subtitle>
+            <v-list-item-title
+              v-html="item.title || item.url"
+              :title="item.title"
+            ></v-list-item-title>
+            <v-list-item-subtitle
+              v-html="item.description"
+              :title="item.description"
+            ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -58,8 +64,6 @@ let computed = mapState({
   subscribes: (state: any) => state.subscribes,
 })
 
-console.log(computed, 'mapState')
-
 export default Vue.extend({
   name: 'left-bar',
   components: { RightBar },
@@ -67,6 +71,7 @@ export default Vue.extend({
   data() {
     return {
       item: '0',
+      clickIndex: -1,
     }
   },
 
@@ -106,19 +111,30 @@ export default Vue.extend({
       this[LOADING](true)
     },
     click(url: string, index: number) {
-      this.fetchData(url)
+      this.fetchData(url, index)
+      this.clickIndex = index
     },
     updateSubscribes(feed: any) {
-      let { feedUrl, title, description } = feed
+      let { feedUrl, link, title, description } = feed
+
+      feedUrl = feedUrl || link
+      let index = 0
 
       for (const item of this.subscribes) {
-        if (item.url.replace(/\//g, '') === feedUrl.replace(/\//g, '')) {
+        let subscribeUrl = new URL(item.url)
+        let feed = new URL(feedUrl)
+
+        if (
+          feed.hostname === subscribeUrl.hostname &&
+          index === this.clickIndex
+        ) {
           item.title = title
           item.description = description
         }
+
+        index++
       }
 
-      console.log(this.subscribes)
       RSSStorage.updateAllSubscribe(this.subscribes)
     },
   },

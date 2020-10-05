@@ -29,12 +29,16 @@ import TopBar from './components/TopBar.vue'
 
 import { mapState } from 'vuex'
 
+let computed = mapState(['items'])
+
 export default Vue.extend({
   name: 'Root',
   components: { LeftBar, RightBar, TopBar },
   data() {
     return {}
   },
-  computed: mapState(['items']),
+  computed: {
+    ...computed,
+  },
 })
 </script>
