@@ -20,6 +20,7 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 
+
 let computed = mapState({ loading: (state: any) => state.loading })
 
 export default Vue.extend({
