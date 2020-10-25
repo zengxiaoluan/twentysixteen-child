@@ -1,9 +1,15 @@
 #twentysixteen-child
 
-## how to develop
+## how to develop rss reader
 
 Compile ts to js
 
 ```
-tsc -w
+npm run dev
+```
+
+Before upload to production
+
+```shell
+npm run build
 ```

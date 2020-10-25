@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { CLEAR_ITEMS, LOADING, UPDATE_SUBSCRIBERS } from './mutation-types'
+import {
+  CLEAR_ITEMS,
+  LOADING,
+  UPDATE_SUBSCRIBERS,
+  UPDATE_ERROR_MSG,
+} from './mutation-types'
 import RSSStorage from '../database/localstorage'
 import { FeedAddress } from '../interface'
 import { isFeedAddress } from '../util'
@@ -13,6 +18,7 @@ const store = new Vuex.Store({
     items: [''],
     loading: false,
     subscribes: [] as FeedAddress[],
+    errorMessage: '' as string, // When fetch data miss error
   },
   mutations: {
     concatItems(state, payload) {
@@ -33,6 +39,10 @@ const store = new Vuex.Store({
           state.subscribes.push({ ...item })
         }
       }
+    },
+    [UPDATE_ERROR_MSG](state, msg: any) {
+      msg = Array.isArray(msg) ? msg[0] : msg
+      state.errorMessage = msg
     },
   },
 })

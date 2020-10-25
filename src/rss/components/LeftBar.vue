@@ -21,14 +21,8 @@
           :inactive="false"
         >
           <v-list-item-content>
-            <v-list-item-title
-              v-html="item.title || item.url"
-              :title="item.title"
-            ></v-list-item-title>
-            <v-list-item-subtitle
-              v-html="item.description"
-              :title="item.description"
-            ></v-list-item-subtitle>
+            <v-list-item-title v-html="item.title || item.url" :title="item.title"></v-list-item-title>
+            <v-list-item-subtitle v-html="item.description" :title="item.description"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -53,13 +47,20 @@ import { isFeedAddress } from '../util'
 import {
   CLEAR_ITEMS,
   LOADING,
+  UPDATE_ERROR_MSG,
   UPDATE_SUBSCRIBERS,
 } from '../store/mutation-types'
 import { FeedAddress } from '../interface'
 
 let rssParser = new Parser()
 
-let methods = mapMutations([CLEAR_ITEMS, LOADING, UPDATE_SUBSCRIBERS])
+let methods = mapMutations([
+  CLEAR_ITEMS,
+  LOADING,
+  UPDATE_SUBSCRIBERS,
+  UPDATE_ERROR_MSG,
+])
+
 let computed = mapState({
   subscribes: (state: any) => state.subscribes,
 })
@@ -82,7 +83,10 @@ export default Vue.extend({
   methods: {
     ...methods,
     fetchData(feedUrl: string) {
+      this[UPDATE_ERROR_MSG]('')
+
       let action = 'get_rss_data'
+
       axios
         .get(ajaxurl, {
           params: {
@@ -92,8 +96,8 @@ export default Vue.extend({
         })
         .then(async (res) => {
           let { data } = res
-          if (data.success && data.data) {
-            let xml = data.data
+          let { success, data: xml } = data
+          if (success) {
             xml = xml.replace('\ufeff', '')
             let feeds = await rssParser.parseString(xml)
             this.updateSubscribes(feeds)
@@ -104,14 +108,17 @@ export default Vue.extend({
 
             this.$store.commit(CLEAR_ITEMS)
             this.$store.commit('concatItems', { amount: itemsData })
-            this[LOADING](false)
+          } else {
+            this[UPDATE_ERROR_MSG](xml)
           }
+
+          this[LOADING](false)
         })
 
       this[LOADING](true)
     },
     click(url: string, index: number) {
-      this.fetchData(url, index)
+      this.fetchData(url)
       this.clickIndex = index
     },
     updateSubscribes(feed: any) {
