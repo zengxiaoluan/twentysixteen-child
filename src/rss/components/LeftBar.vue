@@ -104,11 +104,14 @@ export default Vue.extend({
 
             console.log(feeds)
 
-            let itemsData: Item[] | undefined = feeds.items
+            let itemsData: Item[] = feeds.items || []
 
             this.$store.commit(CLEAR_ITEMS)
-            this.$store.commit('concatItems', { amount: itemsData })
+            this.$store.commit('concatItems', {
+              amount: itemsData.slice(0, 20),
+            })
           } else {
+            this[CLEAR_ITEMS]()
             this[UPDATE_ERROR_MSG](xml)
           }
 
@@ -128,13 +131,7 @@ export default Vue.extend({
       let index = 0
 
       for (const item of this.subscribes) {
-        let subscribeUrl = new URL(item.url)
-        let feed = new URL(feedUrl)
-
-        if (
-          feed.hostname === subscribeUrl.hostname &&
-          index === this.clickIndex
-        ) {
+        if (index === this.clickIndex) {
           item.title = title
           item.description = description
         }

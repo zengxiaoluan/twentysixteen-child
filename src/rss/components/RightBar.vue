@@ -12,13 +12,13 @@
           <v-card-title>{{ item.title }}</v-card-title>
           <v-card-text>
             <div v-if="item.creator">作者：{{ item.creator }}</div>
-            <div class="text--primary" v-html="item.content"></div>
+            <iframe :src="src(item.content)" width="100%" height="auto" frameborder="0"></iframe>
           </v-card-text>
         </v-card>
       </a>
     </div>
 
-    <v-alert v-if="errorMessage" type="success">{{ errorMessage }}</v-alert>
+    <v-alert v-if="errorMessage" :dismissible="true" type="success">{{ errorMessage }}</v-alert>
   </div>
 </template>
 
@@ -41,6 +41,13 @@ let computed = mapState({
 export default Vue.extend({
   name: 'right-bar',
   props: ['items'],
+  methods: {
+    src(content: string) {
+      console.log(content)
+      let style = '<style>img{width:100%;height:auto}</style>'
+      return 'data:text/html;charset=utf-8,' + content + style
+    },
+  },
   computed: {
     ...computed,
   },
