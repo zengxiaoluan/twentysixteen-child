@@ -7,12 +7,12 @@
     </div>
 
     <div v-else v-for="(item, index) of items" :key="index">
-      <a v-if="item" :href="item.link" target="_blank" style="margin-bottom: 1rem;">
+      <a v-if="item" :href="item.link" target="_blank" style="margin-bottom: 1rem;width:100%">
         <v-card class="mx-auto" margin-bottom="2rem">
           <v-card-title>{{ item.title }}</v-card-title>
           <v-card-text>
             <div v-if="item.creator">作者：{{ item.creator }}</div>
-            <iframe :src="src(item.content)" width="100%" height="auto" frameborder="0"></iframe>
+            <iframe :src="src(item.content)" width="100%" frameborder="0"></iframe>
           </v-card-text>
         </v-card>
       </a>
@@ -44,8 +44,14 @@ export default Vue.extend({
   methods: {
     src(content: string) {
       console.log(content)
-      let style = '<style>img{width:100%;height:auto}</style>'
-      return 'data:text/html;charset=utf-8,' + content + style
+      let style =
+        '<style>img{width:100%;height:auto}.item{height: 8rem;overflow: hidden;}</style>'
+      return (
+        'data:text/html;charset=utf-8,<div class="item">' +
+        content +
+        style +
+        '</div>'
+      )
     },
   },
   computed: {

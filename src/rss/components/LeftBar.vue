@@ -19,6 +19,7 @@
           v-for="(item, i) in subscribes"
           :key="i"
           :inactive="false"
+          @contextmenu.prevent="contextmenu($event, i)"
         >
           <v-list-item-content>
             <v-list-item-title v-html="item.title || item.url" :title="item.title"></v-list-item-title>
@@ -27,10 +28,24 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
+
+    <div>
+      <v-list v-show="showMenu" id="right-menu" class="menu">
+        <v-list-item-group color="primary">
+          <v-list-item :key="0">
+            <v-list-item-title @click="delFeed">删除</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </div>
   </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.menu {
+  position: fixed;
+}
+</style>
 
 <script lang="ts">
 declare var ajaxurl: string
@@ -46,6 +61,7 @@ import RightBar from './RightBar.vue'
 import { isFeedAddress } from '../util'
 import {
   CLEAR_ITEMS,
+  DELETE_SUBSCRIBER,
   LOADING,
   UPDATE_ERROR_MSG,
   UPDATE_SUBSCRIBERS,
@@ -59,6 +75,7 @@ let methods = mapMutations([
   LOADING,
   UPDATE_SUBSCRIBERS,
   UPDATE_ERROR_MSG,
+  DELETE_SUBSCRIBER,
 ])
 
 let computed = mapState({
@@ -71,8 +88,10 @@ export default Vue.extend({
 
   data() {
     return {
+      showMenu: false,
       item: '0',
       clickIndex: -1,
+      delIndex: -1,
     }
   },
 
@@ -82,6 +101,28 @@ export default Vue.extend({
 
   methods: {
     ...methods,
+    delFeed() {
+      this[DELETE_SUBSCRIBER](this.delIndex)
+      this.showMenu = false
+      RSSStorage.updateAllSubscribe(this.subscribes)
+    },
+    contextmenu(event: any, i: number) {
+      let { clientX, clientY, screenX, screenY } = event
+      this.showMenu = true
+
+      let menu: HTMLElement = document.querySelector(
+        '#right-menu'
+      ) as HTMLElement
+
+      this.delIndex = i
+
+      menu.style.left = clientX + 'px'
+      menu.style.top = clientY + 'px'
+
+      setTimeout(() => {
+        this.showMenu = false
+      }, 5 * 1000)
+    },
     fetchData(feedUrl: string) {
       this[UPDATE_ERROR_MSG]('')
 

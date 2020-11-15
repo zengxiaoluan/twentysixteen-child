@@ -5,6 +5,7 @@ import {
   LOADING,
   UPDATE_SUBSCRIBERS,
   UPDATE_ERROR_MSG,
+  DELETE_SUBSCRIBER,
 } from './mutation-types'
 import RSSStorage from '../database/localstorage'
 import { FeedAddress } from '../interface'
@@ -43,6 +44,9 @@ const store = new Vuex.Store({
     [UPDATE_ERROR_MSG](state, msg: any) {
       msg = Array.isArray(msg) ? msg[0] : msg
       state.errorMessage = msg
+    },
+    [DELETE_SUBSCRIBER](state, index) {
+      state.subscribes.splice(index, 1)
     },
   },
 })
