@@ -37,7 +37,9 @@ add_action( 'twentysixteen_credits', 'add_beian_number');
 
 function add_beian_number(){
     echo "<span class='site-title'>&copy;".date('Y-m-d', strtotime(get_userdata(1)->user_registered) ).' - '.date('Y-m-d')."</span>"; 
-    echo "<span class='site-title'><a target='_blank' href='http://www.miibeian.gov.cn/state/outPortal/loginPortal.action'>湘ICP备16005159号-1</a></span>";
+    
+    echo "<span class='site-title'><img width='20' height='20' src='//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png'><a target='_blank' href='https://beian.miit.gov.cn/'>湘ICP备16005159号-1</a></span>";
+    
     echo "<span class='site-title'><a id='top' class='genericon-top' title='回到顶部'></a></span>";
 }
 
