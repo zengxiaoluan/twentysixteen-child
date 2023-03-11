@@ -22,9 +22,6 @@ get_header('slides'); ?>
     <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/vendor.js?'.$version; ?>></script>
     <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/app.js?'.$version; ?>></script>
 
-
-
-
 <style>
     .comment-form textarea {
         background: #f7f7f7;
