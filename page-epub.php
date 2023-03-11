@@ -8,17 +8,19 @@
 get_header('slides'); ?>
 
 
+    <?php
+        $version = 1;
+    ?>
 
 
-
-    <link href=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/css/app.3c1b6dec95c0957518ff9b0fd1573928.css'; ?> rel=stylesheet>
+    <link href=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/css/app.css?'.$version; ?> rel=stylesheet>
 
 
     <div id=app></div>
 
-    <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/manifest.3ad1d5771e9b13dbdad2.js'; ?>></script>
-    <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/vendor.352217ae0725491d320c.js'; ?>></script>
-    <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/app.d665088e1aedcb9ec192.js'; ?>></script>
+    <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/manifest.js?'.$version; ?>></script>
+    <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/vendor.js?'.$version; ?>></script>
+    <script type=text/javascript src=<?php echo get_stylesheet_directory_uri() . '/dist-epub/static/js/app.js?'.$version; ?>></script>
 
 
 
@@ -32,6 +34,9 @@ get_header('slides'); ?>
         color: #686868;
         padding: 0.625em 0.4375em;
         width: 100%;
+    }
+    .site-content {
+        padding: 0;
     }
 </style>
 
