@@ -13,3 +13,4 @@ wp-content/backups/
 sitemap.xml.gz
 node_modules/
 .DS_Store
+dist-epub/static/._.DS_Store
