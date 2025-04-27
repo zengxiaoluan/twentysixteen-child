@@ -1,6 +1,10 @@
 <?php
 
-// 添加验证码字段到评论表单
+/**
+ * 添加验证码字段到评论表单
+ * 2025-04-28
+ */
+
 function add_comment_captcha() {
     $num1 = rand(0, 9);
     $num2 = rand(0, 9);
