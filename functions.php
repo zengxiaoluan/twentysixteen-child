@@ -9,6 +9,9 @@ require_once get_stylesheet_directory() . '/includes/google-adsense.php';
 // add social share buttons
 require_once get_stylesheet_directory() . '/includes/share.php';
 
+// add captcha
+require_once get_stylesheet_directory() . '/includes/captcha.php';
+
 // See http://core.trac.wordpress.org/ticket/21307
 add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
